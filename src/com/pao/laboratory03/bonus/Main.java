@@ -1,5 +1,6 @@
 package com.pao.laboratory03.bonus;
-
+import java.util.List;
+import java.util.Map;
 /**
  * Exercițiul 5 (Bonus) — Sistem de gestiune task-uri cu audit log
  *
@@ -158,6 +159,61 @@ public class Main {
         // TODO: implementează toți cei 10 pași de mai sus
         // Creează TOATE clasele necesare în acest pachet (bonus/)
         // Nu ai subpachete impuse — organizează cum consideri
+        TaskService service = TaskService.getInstance();
+
+        System.out.println("=== Adaugare task-uri ===");
+        service.addTask("Fix login bug", Priority.CRITICAL);
+        service.addTask("Add dark mode", Priority.LOW);
+        service.addTask("Update docs", Priority.MEDIUM);
+        service.addTask("Fix memory leak", Priority.HIGH);
+        service.addTask("Refactor DB layer", Priority.HIGH);
+
+        service.getTasksByPriority(Priority.CRITICAL).forEach(System.out::println);
+        service.getTasksByPriority(Priority.LOW).forEach(System.out::println);
+
+        System.out.println("\n=== Asignare ===");
+        service.assignTask("T001", "Ana");
+        service.assignTask("T003", "Mihai");
+        service.assignTask("T004", "Elena");
+        System.out.println("T001 -> Ana, T003 -> Mihai, T004 -> Elena");
+
+        System.out.println("\n=== Schimbari status ===");
+        try {
+            service.changeStatus("T001", Status.IN_PROGRESS);
+            System.out.println("T001: TODO -> IN_PROGRESS ✓");
+            service.changeStatus("T001", Status.DONE);
+            System.out.println("T001: IN_PROGRESS -> DONE ✓");
+            service.changeStatus("T003", Status.IN_PROGRESS);
+            System.out.println("T003: TODO -> IN_PROGRESS ✓");
+
+            System.out.print("T001: DONE -> TODO -> ");
+            service.changeStatus("T001", Status.TODO);
+        } catch (InvalidTransitionException e) {
+            System.out.println("InvalidTransitionException: " + e.getMessage());
+        }
+
+        System.out.println("\n=== Task-uri HIGH ===");
+        service.getTasksByPriority(Priority.HIGH).forEach(System.out::println);
+
+        System.out.println("\n=== Sumar status ===");
+        Map<Status, Long> summary = service.getStatusSummary();
+        summary.forEach((s, count) -> System.out.println(s + ": " + count));
+
+        System.out.println("\n=== Task-uri neasignate ===");
+        service.getUnassignedTasks().forEach(t -> System.out.println(t.getId() + ": " + t.getTitle()));
+
+        System.out.println("\n=== Scor urgenta (baseDays=5) ===");
+        System.out.println("Total: " + service.getTotalUrgencyScore(5));
+
+        System.out.println();
+        service.printAuditLog();
+
+        System.out.println("\n=== Exceptii ===");
+        try {
+            service.assignTask("T999", "Nimeni");
+        } catch (TaskNotFoundException e) {
+            System.out.println("TaskNotFoundException: " + e.getMessage());
+        }
     }
 }
 
