@@ -1,0 +1,45 @@
+1.1 — Lista de actiuni / interogari (E-learning)
+Inregistrarea unui utilizator nou (Student sau Instructor).
+
+Crearea unui curs nou de catre un instructor.
+
+Inscrierea unui student la un curs (Enrollment).
+
+Adaugarea unei lectii (video sau text) intr-un modul de curs.
+
+Crearea unui Quiz cu mai multe intrebari pentru o anumita lectie.
+
+Simularea sustinerii unui test si calcularea scorului final.
+
+Cautarea cursurilor dupa categorie (ex: Programare, Design, Business).
+
+Vizualizarea progresului unui student la un anumit curs (procentaj lectii parcurse).
+
+Generarea unui certificat de absolvire la finalizarea tuturor lectiilor si testelor.
+
+Listarea tuturor cursurilor predate de un anumit instructor.
+
+Actualizarea detaliilor unui curs (titlu, descriere, pret).
+
+Afisarea topului cursurilor in functie de numarul de studenti inscrisi.
+
+1.2 — Lista de obiecte din domeniu (Clase)
+Utilizator (Clasa abstracta pentru date comune: nume, email, parola).
+
+Student (Extinde Utilizator; are lista de cursuri inscrise si certificate).
+
+Instructor (Extinde Utilizator; are lista de cursuri create si rating).
+
+Curs (Contine titlu, descriere, instructor, categorie, lista de module).
+
+Modul (Grupare de lectii in cadrul unui curs).
+
+Lectie (Poate fi clasa abstracta sau de baza pentru VideoLesson si TextLesson).
+
+Quiz (Contine intrebari, raspunsuri corecte si punctaj minim).
+
+Inscriere (Enrollment) (Obiectul care leaga un Student de un Curs, data inscrierii si statusul).
+
+Certificat (Emis pentru un student la finalizarea unui curs).
+
+Categorie (Enum sau clasa pentru clasificarea cursurilor).
