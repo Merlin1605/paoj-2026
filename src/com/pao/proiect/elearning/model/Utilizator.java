@@ -16,6 +16,7 @@ public abstract class Utilizator {
     // Getteri si Setteri
     public int getId() { return id; }
     public String getEmail() { return email; }
+    public String getNume() { return nume; }
 
     @Override
     public String toString() {

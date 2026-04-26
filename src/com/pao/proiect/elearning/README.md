@@ -24,22 +24,22 @@ Actualizarea detaliilor unui curs (titlu, descriere, pret).
 Afisarea topului cursurilor in functie de numarul de studenti inscrisi.
 
 1.2 — Lista de obiecte din domeniu (Clase)
-Utilizator (Clasa abstracta pentru date comune: nume, email, parola).
+Utilizator (Clasă abstractă pentru date comune: nume, email, id).
 
-Student (Extinde Utilizator; are lista de cursuri inscrise si certificate).
+Student (Extinde Utilizator; are detalii despre facultate și cursuri).
 
-Instructor (Extinde Utilizator; are lista de cursuri create si rating).
+Instructor (Extinde Utilizator; are specializare și listă de cursuri predate).
 
-Curs (Contine titlu, descriere, instructor, categorie, lista de module).
+CoordonatorCurs (Extinde Instructor; adaugă nivel de vechime și management - nivelul 2 de moștenire).
 
-Modul (Grupare de lectii in cadrul unui curs).
+Curs (Conține titlu, descriere, instructor, categorie și colecții de lecții/tag-uri).
 
-Lectie (Poate fi clasa abstracta sau de baza pentru VideoLesson si TextLesson).
+Lectie (Obiect care reține titlul, durata și conținutul video/text).
 
-Quiz (Contine intrebari, raspunsuri corecte si punctaj minim).
+Categorie (Clasă imutabilă pentru indexarea cursurilor: IT, Business, etc.).
 
-Inscriere (Enrollment) (Obiectul care leaga un Student de un Curs, data inscrierii si statusul).
+Quiz (Sistem de întrebări și răspunsuri pentru evaluare).
 
-Certificat (Emis pentru un student la finalizarea unui curs).
+Inscriere (Enrollment - legătura dintre un Student și un Curs).
 
-Categorie (Enum sau clasa pentru clasificarea cursurilor).
+Certificat (Document generat la finalizarea cursului).
