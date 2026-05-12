@@ -25,6 +25,71 @@ public class Main {
         // Format linie tranzacție: [id] data tip: suma RON
         //   Ex: [1] 2024-01-10 CREDIT: 500.00 RON
 
-        System.out.println("TODO: implementează exercițiul 1");
+        Scanner sc = new Scanner(System.in);
+        LinkedList<Tranzactie> coada = new LinkedList<>();
+
+        while (sc.hasNext()) {
+            String comanda = sc.next();
+
+            switch (comanda) {
+                case "ENQUEUE":
+                    coada.addLast(new Tranzactie(sc.nextInt(), sc.nextDouble(), sc.next(), TipTranzactie.valueOf(sc.next())));
+                    break;
+
+                case "DEQUEUE":
+                    if (coada.isEmpty()) {
+                        System.out.println("Coada goala.");
+                    } else {
+                        System.out.println("Procesat: " + coada.removeFirst());
+                    }
+                    break;
+
+                case "PUSH":
+                    coada.addFirst(new Tranzactie(sc.nextInt(), sc.nextDouble(), sc.next(), TipTranzactie.valueOf(sc.next())));
+                    break;
+
+                case "POP":
+                    if (coada.isEmpty()) {
+                        System.out.println("Coada goala.");
+                    } else {
+                        System.out.println("Extras: " + coada.removeFirst());
+                    }
+                    break;
+
+                case "SIZE":
+                    System.out.println("Dimensiune coada: " + coada.size());
+                    break;
+
+                case "PRINT":
+                    coada.forEach(System.out::println);
+                    break;
+
+                case "REMOVE_DEBIT":
+                    int eliminariDebit = 0;
+                    Iterator<Tranzactie> itDebit = coada.iterator();
+                    while (itDebit.hasNext()) {
+                        if (itDebit.next().getTip() == TipTranzactie.DEBIT) {
+                            itDebit.remove();
+                            eliminariDebit++;
+                        }
+                    }
+                    System.out.println("Eliminat " + eliminariDebit + " tranzactii DEBIT.");
+                    break;
+
+                case "REMOVE_BELOW":
+                    double prag = sc.nextDouble();
+                    int eliminariPrag = 0;
+                    Iterator<Tranzactie> itPrag = coada.iterator();
+                    while (itPrag.hasNext()) {
+                        if (itPrag.next().getSuma() < prag) {
+                            itPrag.remove();
+                            eliminariPrag++;
+                        }
+                    }
+                    System.out.printf("Eliminat %d tranzactii sub %.2f RON.\n", eliminariPrag, prag);
+                    break;
+            }
+        }
+        sc.close();
     }
 }
